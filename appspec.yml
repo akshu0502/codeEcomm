@@ -14,6 +14,9 @@ hooks:
       runas: ec2-user
 
   BeforeInstall:
+    - location: scripts/cleanup.sh
+      timeout: 60
+      runas: ec2-user
     - location: scripts/install_tomcat.sh
       timeout: 600
       runas: ec2-user
