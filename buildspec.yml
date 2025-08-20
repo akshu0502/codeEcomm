@@ -1,3 +1,4 @@
+
 version: 0.2
 
 phases:
@@ -18,6 +19,7 @@ phases:
       - echo "Building the WAR file..."
       - mvn clean package -DskipTests
       - echo "Copying WAR to artifact root..."
+      # Copy WAR to root so appspec.yml is simple
       - cp target/Ecomm.war .
 
   post_build:
@@ -27,9 +29,7 @@ phases:
 
 artifacts:
   files:
-    - Ecomm.war               # WAR at root
-    - appspec.yml             # must be at root for CodeDeploy
-    - tomcat-users.xml        # custom tomcat-users.xml
-    - scripts/*               # deployment scripts
-  name: EcommArtifact         # final artifact will be EcommArtifact.zip
-  discard-paths: yes          # avoids nested folders inside zip
+    - Ecomm.war               
+    - appspec.yml
+    - scripts/*
+    - tomcat-users.xml
