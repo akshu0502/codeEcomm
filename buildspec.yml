@@ -28,7 +28,7 @@ phases:
 
 artifacts:
   files:
-    - Ecomm.war               # WAR in artifact root
+    - Ecomm.war               
     - appspec.yml
     - scripts/*
     - tomcat-users.xml
