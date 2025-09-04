@@ -23,7 +23,7 @@ jobs:
           INSTANCE_ID=$(aws ec2 run-instances \
             --image-id ami-0861f4e788f5069dd \
             --instance-type t2.micro \
-            --key-name pemfile \
+            --key-name ec2instance \
             --security-group-ids sg-0a8de017b0eeca436 \
             --subnet-id subnet-0876455ec433c9704 \
             --query 'Instances[0].InstanceId' \
