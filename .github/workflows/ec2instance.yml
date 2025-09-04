@@ -1,0 +1,31 @@
+name: Launch EC2 Instance
+
+on:
+  workflow_dispatch:
+
+jobs:
+  launch-ec2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.ACESSKEY }}
+          aws-secret-access-key: ${{ secrets.SECRETKEY }}
+          aws-region: ${{ secrets.AWSREGION }}
+
+      - name: Launch EC2 instance
+        run: |
+          INSTANCE_ID=$(aws ec2 run-instances \
+            --image-id ami-0861f4e788f5069dd \
+            --instance-type t2.micro \
+            --key-name pemfile \
+            --security-group-ids sg-0a8de017b0eeca436 \
+            --subnet-id subnet-0876455ec433c9704 \
+            --query 'Instances[0].InstanceId' \
+            --output text)
+          echo "✅ Launched EC2 Instance with ID: $INSTANCE_ID"
